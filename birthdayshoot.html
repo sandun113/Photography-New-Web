@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Birthday Girl Shoots — Sandun Dilhara</title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --bg:#0a0e1a;
+      --card:#1a1f35;
+      --accent:#ffffff;
+      --text:#ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Montserrat, Segoe UI, system-ui, Arial, sans-serif;
+      background: linear-gradient(-45deg, #0a0e1a, #1a1f35, #040406, #0a0e1a);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      color: var(--text);
+    }
+
+    @keyframes gradientBG {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    header {
+      padding: 22px 40px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    header a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .btn-back {
+      border: 2px solid var(--accent);
+      padding: 10px 16px;
+      border-radius: 10px;
+      transition: 0.3s ease;
+    }
+
+    .btn-back:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    h1 {
+      font-size: 34px;
+      margin-bottom: 8px;
+    }
+
+    .lead {
+      color: #b8c2d6;
+      margin-bottom: 28px;
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 22px;
+    }
+
+    .video-grid figure {
+      background: var(--card);
+      padding: 12px;
+      border-radius: 14px;
+      transition: 0.3s ease;
+    }
+
+    .video-grid figure:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+    }
+
+    .video-grid img {
+      width: 100%;
+      height: auto;              /* keep natural height */
+      max-height: 500px;         /* limit height if needed */
+      object-fit: cover;         /* fill container without black bars */
+      border-radius: 10px;
+      display: block;
+      background: transparent;   /* remove black background */
+    }
+
+    .meta {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 14px;
+      font-size: 14px;
+    }
+
+    footer {
+      margin: 70px 0 40px;
+      text-align: center;
+      font-size: 14px;
+      color: #9aa6c4;
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 18px 20px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      .video-grid img {
+        height: 200px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <a href="index.html#services">&larr; Back to Services</a>
+    <a class="btn-back" href="index.html#home">Home</a>
+</header>
+
+<main class="container">
+  <h1>Birthday Girl Shoots</h1>
+  <p class="lead">
+    Celebrate elegance and joy with cinematic birthday shoots. Click any photo to explore the magic.
+  </p>
+
+  <div class="video-grid">
+
+    <figure>
+      <img src="/1.jpg" alt="Birthday Shoot 1 - Garden Portraits">
+      <figcaption class="meta">
+        <strong>1</strong> <span>• Birthday Girl</span>
+      </figcaption>
+    </figure>
+
+    <figure>
+      <img src="/2.jpg" alt="Birthday Shoot 2 - Sunset Celebration">
+      <figcaption class="meta">
+        <strong> 2</strong> <span>• Birthday Girl </span>
+      </figcaption>
+    </figure>
+
+    <figure>
+      <img src="/3.jpg" alt="Birthday Shoot 3 - Elegant Indoor Setup">
+      <figcaption class="meta">
+        <strong> 3</strong> <span>• Birthday Girl</span>
+      </figcaption>
+    </figure>
+
+    <figure>
+      <img src="/4.jpg" alt="Birthday Shoot 4 - Beach Party">
+      <figcaption class="meta">
+        <strong> 4</strong> <span>• Birthday Girl</span>
+      </figcaption>
+    </figure>
+
+    <figure>
+      <img src="/5.jpg" alt="Birthday Shoot 5 - Indoor Setup">
+      <figcaption class="meta">
+        <strong>5</strong> <span>• Birthday Girl</span>
+      </figcaption>
+    </figure>
+
+    <figure>
+      <img src="/6.jpg" alt="Birthday Shoot 6 - Elegant Indoor Setup">
+      <figcaption class="meta">
+        <strong> 6</strong> <span>• Birthday Girl</span>
+      </figcaption>
+    </figure>
+
+  </div>
+</main>
+
+<footer>
+  &copy; 2025 Sandun Dilhara — Birthday Shoots
+</footer>
+
+</body>
+</html>
