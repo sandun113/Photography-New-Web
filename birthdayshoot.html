@@ -120,6 +120,37 @@
       color: #9aa6c4;
     }
 
+    /* Lightbox styles */
+    .lightbox img { cursor: zoom-in; display:block; border-radius:10px; }
+    .lb-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.88);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 24px;
+    }
+    .lb-overlay.open { display: flex; }
+    .lb-overlay img {
+      max-width: 96%;
+      max-height: 96%;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+    }
+    .lb-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      color: #fff;
+      font-size: 28px;
+      line-height: 1;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+
     @media (max-width: 480px) {
       header {
         padding: 18px 20px;
@@ -135,7 +166,6 @@
     }
   </style>
 </head>
-
 <body>
 
 <header>
@@ -152,58 +182,114 @@
   <div class="video-grid">
 
     <figure>
-      <img src="https://github.com/sandun113/Photography-New-Web/blob/main/1.JPG?raw=true" alt="Birthday Shoot 1 - Garden Portraits">
+      <a href="https://github.com/sandun113/Photography-New-Web/blob/main/1.JPG?raw=true" class="lightbox">
+        <img src="https://github.com/sandun113/Photography-New-Web/blob/main/1.JPG?raw=true" alt="Birthday girl standing and smiling in a sunlit garden surrounded by flowering shrubs; joyful and serene">
+      </a>
       <figcaption class="meta">
-        <strong>1</strong> <span>• Birthday Girl</span>
-      </figcaption>
-    </figure>
-
-    
-    <figure>
-      <img src="https://github.com/sandun113/Photography-New-Web/blob/main/2.JPG?raw=true" alt="Birthday Shoot 2 - Sunset Celebration">
-      <figcaption class="meta">
-        <strong> 2</strong> <span>• Birthday Girl </span>
+        <strong>1</strong> <span>• Garden Portraits</span>
       </figcaption>
     </figure>
 
     <figure>
-      <img src="https://github.com/sandun113/Photography-New-Web/blob/main/3.JPG?raw=true" alt="Birthday Shoot 3 - Elegant Indoor Setup">
+      <a href="https://github.com/sandun113/Photography-New-Web/blob/main/2.JPG?raw=true" class="lightbox">
+        <img src="https://github.com/sandun113/Photography-New-Web/blob/main/2.JPG?raw=true" alt="Birthday girl sitting on a blanket at sunset holding a small cake with a lit candle; warm and celebratory">
+      </a>
       <figcaption class="meta">
-        <strong> 3</strong> <span>• Birthday Girl</span>
+        <strong>2</strong> <span>• Sunset Celebration</span>
       </figcaption>
     </figure>
 
     <figure>
-      <img src="https://github.com/sandun113/Photography-New-Web/blob/main/4.JPG?raw=true" alt="Birthday Shoot 4 - Beach Party">
+      <a href="https://github.com/sandun113/Photography-New-Web/blob/main/3.JPG?raw=true" class="lightbox">
+        <img src="https://github.com/sandun113/Photography-New-Web/blob/main/3.JPG?raw=true" alt="Birthday girl in an elegant indoor setup with soft lighting and decorative elements; sophisticated and joyful">
+      </a>
       <figcaption class="meta">
-        <strong> 4</strong> <span>• Birthday Girl</span>
+        <strong>3</strong> <span>• Elegant Indoor Setup</span>
       </figcaption>
     </figure>
 
     <figure>
-      <img src="https://github.com/sandun113/Photography-New-Web/blob/main/5.JPG?raw=true" alt="Birthday Shoot 5 - Indoor Setup">
+      <a href="https://github.com/sandun113/Photography-New-Web/blob/main/4.JPG?raw=true" class="lightbox">
+        <img src="https://github.com/sandun113/Photography-New-Web/blob/main/4.JPG?raw=true" alt="Birthday girl at a beach party with a festive atmosphere, holding a drink and laughing; carefree and happy">
+      </a>
       <figcaption class="meta">
-        <strong>5</strong> <span>• Birthday Girl</span>
+        <strong>4</strong> <span>• Beach Party</span>
       </figcaption>
     </figure>
 
     <figure>
-      <img src="https://github.com/sandun113/Photography-New-Web/blob/main/6.JPG?raw=true" alt="Birthday Shoot 6 - Elegant Indoor Setup">
+      <a href="https://github.com/sandun113/Photography-New-Web/blob/main/5.JPG?raw=true" class="lightbox">
+        <img src="https://github.com/sandun113/Photography-New-Web/blob/main/5.JPG?raw=true" alt="Birthday girl in a beautifully decorated indoor setup with a birthday cake and balloons; cheerful and festive">
+      </a>
       <figcaption class="meta">
-        <strong> 6</strong> <span>• Birthday Girl</span>
+        <strong>5</strong> <span>• Indoor Setup</span>
+      </figcaption>
+    </figure>
+
+    <figure>
+      <a href="https://github.com/sandun113/Photography-New-Web/blob/main/6.JPG?raw=true" class="lightbox">
+        <img src="https://github.com/sandun113/Photography-New-Web/blob/main/6.JPG?raw=true" alt="Birthday girl in an elegant indoor setup with a grand piano and soft, warm lighting; classy and joyful">
+      </a>
+      <figcaption class="meta">
+        <strong>6</strong> <span>• Elegant Indoor Setup</span>
       </figcaption>
     </figure>
 
   </div>
+
+  <!-- Lightbox overlay (reusable) -->
+  <div class="lb-overlay" id="lbOverlay" role="dialog" aria-modal="true" aria-hidden="true">
+    <button class="lb-close" id="lbClose" aria-label="Close">×</button>
+    <img id="lbImage" src="" alt="">
+  </div>
+
 </main>
 
 <footer>
   &copy; 2025 Sandun Dilhara — Birthday Shoots
 </footer>
 
+<script>
+  // Simple accessible lightbox (client-side only)
+  (function(){
+    const links = document.querySelectorAll('a.lightbox');
+    const overlay = document.getElementById('lbOverlay');
+    const lbImage = document.getElementById('lbImage');
+    const closeBtn = document.getElementById('lbClose');
+
+    function open(src, alt){
+      lbImage.src = src;
+      lbImage.alt = alt || '';
+      overlay.classList.add('open');
+      overlay.setAttribute('aria-hidden','false');
+      closeBtn.focus();
+      document.body.style.overflow = 'hidden';
+    }
+    function close(){
+      overlay.classList.remove('open');
+      overlay.setAttribute('aria-hidden','true');
+      lbImage.src = '';
+      document.body.style.overflow = '';
+    }
+
+    links.forEach(a => {
+      a.addEventListener('click', function(e){
+        e.preventDefault();
+        const img = a.querySelector('img');
+        const src = a.getAttribute('href') || img.src;
+        open(src, img.getAttribute('alt'));
+      });
+    });
+
+    overlay.addEventListener('click', function(e){
+      if(e.target === overlay || e.target === closeBtn) close();
+    });
+
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && overlay.classList.contains('open')) close();
+    });
+  })();
+</script>
+
 </body>
 </html>
-
-
-
-
