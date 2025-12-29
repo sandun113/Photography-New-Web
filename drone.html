@@ -2,615 +2,69 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Drone Cinematography — Sandun Dilhara</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Drone Videos &mdash; Sandun Dilhara</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    :root {
-      --noir: #0f0f0f;
-      --smoke: #1a1a1a;
-      --ash: #2a2a2a;
-      --silver: #c0c0c0;
-      --platinum: #e8e8e8;
-      --gold: #d4af37;
-      --accent: #ff4757;
-    }
-    
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    html {
-      scroll-behavior: smooth;
-    }
-    
-    body {
-      font-family: "Work Sans", sans-serif;
-      background: var(--noir);
-      color: var(--platinum);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-    
-    /* Subtle grid pattern */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-      background-size: 50px 50px;
-      pointer-events: none;
-      z-index: 0;
-    }
-    
-    /* Navigation */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      padding: 2rem 5%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(15, 15, 15, 0.8);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      animation: navSlide 0.8s ease-out;
-    }
-    
-    @keyframes navSlide {
-      from { 
-        opacity: 0;
-        transform: translateY(-100%);
-      }
-      to { 
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
-    .brand {
-      font-family: "Cormorant Garamond", serif;
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: var(--platinum);
-      text-decoration: none;
-      letter-spacing: 1px;
-      transition: color 0.3s ease;
-    }
-    
-    .brand:hover {
-      color: var(--gold);
-    }
-    
-    .nav-link {
-      padding: 0.8rem 2rem;
-      background: transparent;
-      color: var(--platinum);
-      text-decoration: none;
-      border: 1px solid var(--silver);
-      border-radius: 4px;
-      font-weight: 500;
-      font-size: 0.9rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      transition: all 0.4s ease;
-    }
-    
-    .nav-link:hover {
-      background: var(--platinum);
-      color: var(--noir);
-      transform: translateY(-2px);
-    }
-    
-    /* Hero */
-    .hero {
-      position: relative;
-      z-index: 10;
-      min-height: 85vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      max-width: 1600px;
-      margin: 0 auto;
-      padding: 8rem 5% 4rem;
-      animation: fadeIn 1s ease-out 0.3s both;
-    }
-    
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    
-    .hero-tag {
-      display: inline-block;
-      padding: 0.6rem 1.5rem;
-      background: rgba(212, 175, 55, 0.1);
-      color: var(--gold);
-      border: 1px solid var(--gold);
-      border-radius: 4px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 2rem;
-      width: fit-content;
-      animation: slideUp 0.8s ease-out 0.5s both;
-    }
-    
-    @keyframes slideUp {
-      from { 
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to { 
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
-    .hero h1 {
-      font-family: "Cormorant Garamond", serif;
-      font-size: clamp(3.5rem, 9vw, 8rem);
-      font-weight: 700;
-      line-height: 1;
-      margin-bottom: 1.5rem;
-      letter-spacing: -2px;
-      animation: slideUp 0.8s ease-out 0.6s both;
-    }
-    
-    .hero h1 .line {
-      display: block;
-    }
-    
-    .hero h1 .accent {
-      color: var(--gold);
-      font-style: italic;
-    }
-    
-    .hero-description {
-      max-width: 650px;
-      font-size: 1.2rem;
-      color: var(--silver);
-      font-weight: 300;
-      line-height: 1.8;
-      margin-bottom: 3rem;
-      animation: slideUp 0.8s ease-out 0.7s both;
-    }
-    
-    .hero-stats {
-      display: flex;
-      gap: 4rem;
-      animation: slideUp 0.8s ease-out 0.8s both;
-    }
-    
-    .stat-item {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-    
-    .stat-value {
-      font-family: "Cormorant Garamond", serif;
-      font-size: 3.5rem;
-      font-weight: 700;
-      color: var(--gold);
-      line-height: 1;
-    }
-    
-    .stat-label {
-      font-size: 0.85rem;
-      color: var(--silver);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      font-weight: 500;
-    }
-    
-    /* Gallery */
-    .gallery {
-      position: relative;
-      z-index: 10;
-      max-width: 1600px;
-      margin: 6rem auto;
-      padding: 0 5% 8rem;
-    }
-    
-    .gallery-header {
-      text-align: center;
-      margin-bottom: 5rem;
-      animation: fadeIn 0.8s ease-out both;
-    }
-    
-    .gallery-title {
-      font-family: "Cormorant Garamond", serif;
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      font-weight: 700;
-      margin-bottom: 1rem;
-      letter-spacing: -1px;
-    }
-    
-    .gallery-subtitle {
-      font-size: 1.1rem;
-      color: var(--silver);
-      font-weight: 300;
-    }
-    
-    .video-showcase {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 450px), 1fr));
-      gap: 3rem;
-    }
-    
-    .video-item {
-      position: relative;
-      animation: revealItem 0.8s ease-out both;
-    }
-    
-    .video-item:nth-child(1) { animation-delay: 0.2s; }
-    .video-item:nth-child(2) { animation-delay: 0.4s; }
-    .video-item:nth-child(3) { animation-delay: 0.6s; }
-    
-    @keyframes revealItem {
-      from { 
-        opacity: 0;
-        transform: translateY(60px);
-      }
-      to { 
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
-    .video-container {
-      position: relative;
-      overflow: hidden;
-      border-radius: 2px;
-      background: var(--smoke);
-      margin-bottom: 1.5rem;
-      cursor: pointer;
-      transition: all 0.4s ease;
-    }
-    
-    .video-container::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 100%);
-      z-index: 1;
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      pointer-events: none;
-    }
-    
-    .video-container:hover::before {
-      opacity: 1;
-    }
-    
-    .video-container:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
-    }
-    
-    .video-container video {
-      width: 100%;
-      height: 340px;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.4s ease;
-    }
-    
-    .video-container:hover video {
-      transform: scale(1.03);
-    }
-    
-    .video-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      z-index: 2;
-      pointer-events: none;
-    }
-    
-    .video-container:hover .video-overlay {
-      opacity: 1;
-    }
-    
-    .play-icon {
-      width: 80px;
-      height: 80px;
-      border: 2px solid var(--platinum);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      transition: all 0.3s ease;
-    }
-    
-    .video-container:hover .play-icon {
-      transform: scale(1.1);
-      border-color: var(--gold);
-      background: rgba(212, 175, 55, 0.2);
-    }
-    
-    .play-icon::after {
-      content: '';
-      width: 0;
-      height: 0;
-      border-left: 20px solid var(--platinum);
-      border-top: 12px solid transparent;
-      border-bottom: 12px solid transparent;
-      margin-left: 5px;
-    }
-    
-    .video-content {
-      padding: 0.5rem 0;
-    }
-    
-    .video-meta {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 0.8rem;
-    }
-    
-    .video-number {
-      font-family: "Cormorant Garamond", serif;
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--gold);
-    }
-    
-    .video-badge {
-      padding: 0.3rem 0.8rem;
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--silver);
-      border-radius: 3px;
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-    
-    .video-title {
-      font-family: "Cormorant Garamond", serif;
-      font-size: 1.8rem;
-      font-weight: 600;
-      color: var(--platinum);
-      margin-bottom: 0.5rem;
-      transition: color 0.3s ease;
-    }
-    
-    .video-item:hover .video-title {
-      color: var(--gold);
-    }
-    
-    .video-info {
-      font-size: 0.95rem;
-      color: var(--silver);
-      font-weight: 300;
-    }
-    
-    /* Footer */
-    footer {
-      position: relative;
-      z-index: 10;
-      padding: 4rem 5%;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      text-align: center;
-    }
-    
-    .footer-content {
-      max-width: 1600px;
-      margin: 0 auto;
-    }
-    
-    .footer-text {
-      font-size: 0.9rem;
-      color: var(--silver);
-      font-weight: 300;
-      margin-bottom: 0.5rem;
-    }
-    
-    .footer-location {
-      font-size: 0.85rem;
-      color: var(--gold);
-      font-weight: 500;
-      letter-spacing: 1px;
-    }
-    
-    /* Responsive */
-    @media (max-width: 768px) {
-      nav {
-        padding: 1.5rem 5%;
-      }
-      
-      .brand {
-        font-size: 1.4rem;
-      }
-      
-      .nav-link {
-        padding: 0.6rem 1.5rem;
-        font-size: 0.8rem;
-      }
-      
-      .hero {
-        padding: 6rem 5% 3rem;
-        min-height: 70vh;
-      }
-      
-      .hero-stats {
-        gap: 2.5rem;
-      }
-      
-      .stat-value {
-        font-size: 2.5rem;
-      }
-      
-      .gallery {
-        margin: 4rem auto;
-        padding: 0 5% 5rem;
-      }
-      
-      .gallery-header {
-        margin-bottom: 3rem;
-      }
-      
-      .video-showcase {
-        gap: 2rem;
-      }
-      
-      .video-container video {
-        height: 260px;
-      }
-    }
-    
-    @media (max-width: 480px) {
-      .hero-stats {
-        flex-direction: column;
-        gap: 2rem;
-      }
-      
-      .video-container video {
-        height: 220px;
-      }
-      
-      .video-title {
-        font-size: 1.5rem;
-      }
-    }
+    :root { --bg:#0a0e1a; --card:#1a1f35; --accent:#00d4ff; --text:#fff; }
+    body{margin:0;font-family:Montserrat,Segoe UI,system-ui,Arial;background:var(--bg);color:var(--text);}
+    header{padding:22px 40px;border-bottom:1px solid rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:space-between}
+    header a{color:var(--accent);text-decoration:none;font-weight:700}
+    .container{max-width:1200px;margin:40px auto;padding:0 20px}
+    h1{font-size:34px;margin-bottom:8px}
+    p.lead{color:#b8c2d6;margin-bottom:24px}
+    .video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px}
+    .video-grid video, .video-grid iframe{width:100%;height:260px;border-radius:12px;background:#000;box-shadow:0 12px 36px rgba(0,0,0,0.6);display:block}
+    .meta{display:flex;gap:12px;align-items:center;margin-top:14px}
+    .btn-back{background:transparent;border:2px solid var(--accent);color:var(--accent);padding:10px 14px;border-radius:10px;text-decoration:none}
+    footer{margin:60px 0 40px;color:#9aa6c4;text-align:center}
+    @media (max-width:480px){.video-grid video,.video-grid iframe{height:200px}}
   </style>
 </head>
 <body>
-  <nav>
-    <a href="index.html" class="brand">Sandun Dilhara</a>
-    <a href="index.html" class="nav-link">Home</a>
-  </nav>
-  
-  <main>
-    <section class="hero">
-      <div class="hero-tag">Aerial Cinematography</div>
-      <h1>
-        <span class="line">Capturing The World</span>
-        <span class="line">From <span class="accent">Above</span></span>
-      </h1>
-      <p class="hero-description">
-        Professional drone cinematography showcasing breathtaking aerial perspectives. 
-        Every frame tells a story of beauty, movement, and precision captured in stunning 4K resolution.
-      </p>
-      <div class="hero-stats">
-        <div class="stat-item">
-          <div class="stat-value">4K</div>
-          <div class="stat-label">Ultra HD</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-value">60</div>
-          <div class="stat-label">Frames Per Second</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-value">03</div>
-          <div class="stat-label">Featured Films</div>
-        </div>
-      </div>
-    </section>
-    
-    <section class="gallery">
-      <div class="gallery-header">
-        <h2 class="gallery-title">Featured Collection</h2>
-        <p class="gallery-subtitle">A curated selection of cinematic aerial footage</p>
-      </div>
-      
-      <div class="video-showcase">
-        <div class="video-item">
-          <div class="video-container">
-            <video controls preload="metadata" poster="thumb1.jpg">
-              <source src="fish-man-rowing.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-            <div class="video-overlay">
-              <div class="play-icon"></div>
-            </div>
-          </div>
-          <div class="video-content">
-            <div class="video-meta">
-              <span class="video-number">01</span>
-              <span class="video-badge">4K • Cinematic</span>
-            </div>
-            <h3 class="video-title">Fisherman at Dawn</h3>
-            <p class="video-info">Early morning serenity captured from above</p>
-          </div>
-        </div>
-        
-        <div class="video-item">
-          <div class="video-container">
-            <video controls preload="metadata" poster="thumb2.jpg">
-              <source src="madiyawa-lake.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-            <div class="video-overlay">
-              <div class="play-icon"></div>
-            </div>
-          </div>
-          <div class="video-content">
-            <div class="video-meta">
-              <span class="video-number">02</span>
-              <span class="video-badge">4K • Landscape</span>
-            </div>
-            <h3 class="video-title">Madiyawa Lake</h3>
-            <p class="video-info">Tranquil waters and natural beauty</p>
-          </div>
-        </div>
-        
-        <div class="video-item">
-          <div class="video-container">
-            <video controls preload="metadata" poster="thumb3.jpg">
-              <source src="evening-drone.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-            <div class="video-overlay">
-              <div class="play-icon"></div>
-            </div>
-          </div>
-          <div class="video-content">
-            <div class="video-meta">
-              <span class="video-number">03</span>
-              <span class="video-badge">4K • Aerial</span>
-            </div>
-            <h3 class="video-title">Golden Hour Flight</h3>
-            <p class="video-info">Magical evening light from the sky</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-  
-  <footer>
-    <div class="footer-content">
-      <p class="footer-text">&copy; 2025 Sandun Dilhara. All Rights Reserved.</p>
-      <p class="footer-location">Filmed in Sri Lanka</p>
+  <header>
+    <div class="brand">
+      <a href="Index.html">&larr; Back to Home</a>
     </div>
+    <div>
+      <a class="btn-back" href="Index.html">Home</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Drone Videos</h1>
+    <p class="lead">A curated selection of aerial videos &mdash; local MP4 files and embedded YouTube examples. Click any video to play.</p>
+
+    <div class="video-grid">
+      <div>
+        <video controls poster="thumb1.jpg">
+          <source src="Fish Man Rowing.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div class="meta"> <strong>Drone 1</strong> <span style="color:#8eaedf;">&bull; 4K</span> </div>
+      </div>
+
+      <div>
+        <video controls poster="thumb2.jpg">
+          <source src="Madiyawa Lake.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div class="meta"> <strong>Drone 2</strong> <span style="color:#8eaedf;">&bull; Cinematic</span> </div>
+      </div>
+
+      <div>
+        <video controls poster="thumb3.jpg">
+          <source src="The Beauty of an Evening.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div class="meta"> <strong>Drone 3</strong> <span style="color:#8eaedf;">&bull; 4K</span> </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    &copy; 2025 Sandun Dilhara &mdash; Drone Videography
   </footer>
 </body>
 </html>
